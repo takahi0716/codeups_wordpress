@@ -1,0 +1,17 @@
+@use "global" as *;
+
+.campaign-cards{
+
+}
+
+.campaign-cards__item {
+
+}
+
+.campaign-cards__item + .campaign-cards__item{
+  margin-left: rem(24);
+  @include mq(md){
+    margin-left: rem(40);
+  }
+
+}

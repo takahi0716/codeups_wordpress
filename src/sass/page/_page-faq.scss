@@ -1,0 +1,10 @@
+@use "global" as *;
+
+.page-faq{
+
+}
+
+.page-faq .page-faq__inner{
+    max-width: rem(750);
+    width: 100%;
+}

@@ -1,0 +1,33 @@
+@use "global" as *;
+
+.page-content{
+}
+
+.page-content__title{
+  font-size:rem(24);
+  font-weight: 500;
+  @include mq(md) {
+    font-size:rem(32);
+  }
+
+}
+.page-content__text{
+  line-height: 2; /* 200% */
+}
+.page-content__text:first-of-type{
+  margin-top: rem(40);
+}
+
+.page-content__text:not(:first-of-type){
+  margin-top: rem(32);
+
+}
+.page-content__list{
+  margin-top: rem(32);
+}
+
+.page-content__list li{
+  text-indent: -1em;
+  padding-left: 1em;
+  line-height: 2; /* 200% */
+}

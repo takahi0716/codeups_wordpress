@@ -1,0 +1,14 @@
+@use "global" as *;
+
+
+.information-sub__content{
+  width: 100%;
+}
+
+.information-sub__item {
+  margin-top: rem(16);
+
+  @include mq(md) {
+    margin-top: rem(24);
+  }
+}

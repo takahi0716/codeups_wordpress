@@ -1,0 +1,26 @@
+@use "global" as *;
+
+.archive-campaign-cards {
+
+  padding-left: rem(30);
+    padding-right: rem(30);
+    display: grid;
+    gap: rem(40) 0;
+    grid-template-columns:1fr;
+
+  @include mq(md) {
+
+    display: grid;
+    gap: rem(80) rem(40);
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.sidebar__campaign-cards.archive-campaign-cards--sideber{
+  gap: rem(40) 0;
+  grid-template-columns:1fr;
+  padding-left: 0;
+  padding-right: 0;
+}

@@ -1,0 +1,44 @@
+@use "global" as *;
+
+.sidebar__voice{
+  margin-top: rem(80);
+}
+
+.sidebar__voice-itme{
+  margin-top: rem(24);
+}
+
+.sidebar__campaign{
+  margin-top: rem(80);
+}
+
+.sidebar__campaign-cards{
+  margin-top: rem(24);
+}
+
+.sidebar__campaign-wrapper{
+  text-align: center;
+}
+
+.sidebar__archive{
+  margin-top: rem(80);
+}
+
+.sidebar__archive-item{
+  color: $accent-color;
+  margin-top: rem(24);
+}
+
+.sidebar__archive-item ul {
+  list-style: url(../../assets/images/common/Polygon1.svg);
+  list-style-position: inside;
+}
+
+.sidebar__archive-item li {
+  margin-top: rem(4);
+  font-size: rem(24);
+}
+
+.sidebar__archive-item li ul {
+  text-indent: 1em;
+}

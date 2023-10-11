@@ -1,0 +1,8 @@
+@use "global" as *;
+
+.page-price {}
+
+.page-price .page-price__inner {
+  max-width: rem(750);
+  width: 100%;
+}

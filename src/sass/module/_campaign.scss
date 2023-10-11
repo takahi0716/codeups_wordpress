@@ -1,0 +1,39 @@
+@use "global" as *;
+
+.campaign__swiper-buttons {
+  display: none;
+
+  @include mq(md) {
+    display: block;
+    position: relative;
+  }
+}
+
+.campaign__swiper-button {
+  position: absolute;
+  width: rem(240);
+  height: rem(80);
+  top: rem(-65);
+  right: calc(50% - min(50%, rem(542)));
+}
+
+.campaign__swiper {
+  margin-top: rem(29);
+  margin-right: calc(50% - 49vw);
+  @include mq(md) {
+    margin-top: rem(40);
+  }
+}
+
+.campaign__swiper-wrapper {
+  padding-bottom: rem(10);
+}
+
+.campaign__wrapper {
+  margin-top: rem(28);
+  text-align: center;
+  // padding-right: rem(4);
+  @include mq(md) {
+    margin-top: rem(72);
+  }
+}

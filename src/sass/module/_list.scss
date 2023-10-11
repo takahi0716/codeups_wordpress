@@ -1,0 +1,38 @@
+@use "global" as *;
+
+.list {
+}
+
+.list__item {
+  padding-left: rem(22);
+  line-height: 1.125; /* 112.5% */
+  position: relative;
+}
+
+.list__item:first-child {
+  font-weight: $bold;
+}
+
+.list__item:first-child::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: rem(18);
+  height: rem(18);
+  background-image: url(../images/common/seastar.png);
+  background-size: cover;
+}
+
+.list__item + .list__item {
+  margin-top: rem(24);
+}
+.list__item a {
+  display: block;
+}
+.list__item:hover {
+  opacity: 0.8;
+}
+.lists__item .list__item--image::before {
+  background-image: url(../images/common/seastar_list.png);
+}

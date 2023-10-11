@@ -1,0 +1,45 @@
+@use "global" as *;
+
+.swiper {
+
+}
+
+.swiper-slide {
+  max-width: rem(280);
+  width: 100%;
+  height: auto;
+  @include mq(md) {
+    max-width: rem(333);
+  }
+}
+
+.swiper-button {
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  @include mq(md) {
+    height: rem(80);
+    width: rem(80);
+    top: 0;
+    margin-top: 0;
+  }
+}
+
+/* 前へ次への矢印カスタマイズ */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  height: rem(80);
+  width: rem(80);
+}
+
+.swiper-button-prev {
+  left: 0;
+}
+
+.swiper-button-next {
+  right: 0;
+}
