@@ -1,44 +1,53 @@
 @use "global" as *;
 
-.sidebar__voice{
+.sidebar__voice {
   margin-top: rem(80);
 }
 
-.sidebar__voice-itme{
+.sidebar__voice-itme {
   margin-top: rem(24);
 }
 
-.sidebar__campaign{
+.sidebar__campaign {
   margin-top: rem(80);
 }
 
-.sidebar__campaign-cards{
+.sidebar__campaign-cards {
   margin-top: rem(24);
 }
 
-.sidebar__campaign-wrapper{
+.sidebar__campaign-wrapper {
   text-align: center;
 }
 
-.sidebar__archive{
+.sidebar__archive {
   margin-top: rem(80);
 }
 
-.sidebar__archive-item{
+.sidebar__archive-item {
   color: $accent-color;
   margin-top: rem(24);
+  font-size: rem(24);
+}
+
+.sidebar__archive-year{
+  cursor: pointer;
+}
+
+.sidebar__archive-month {
+  margin-left: rem(24);
 }
 
 .sidebar__archive-year,
-.sidebar__archive-month {
+.sidebar__archive-month li {
   margin-top: rem(4);
-  font-size: rem(24);
+
   position: relative;
   padding-left: rem(32);
-
 }
 
-.sidebar__archive-year::before {
+.sidebar__archive-year::before,
+.sidebar__archive-month li::before {
   border-color: #408f95 transparent transparent transparent;
   border-style: solid;
   border-width: 19px 10px 0 10px;
@@ -49,12 +58,12 @@
   position: absolute;
   top: 0.625rem;
   transition: all 0.3s;
+  transform: rotate(-90deg);
   width: 0;
 }
 
 
-.sidebar__archive-year.is-close::before,
-.sidebar__archive-month::before {
+.sidebar__archive-year.is-close::before {
   border-color: #408f95 transparent transparent transparent;
   border-style: solid;
   border-width: 19px 10px 0 10px;
@@ -64,7 +73,7 @@
   left: 0.3125rem;
   position: absolute;
   top: 0.625rem;
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
   transition: 0.3s;
   width: 0;
 }

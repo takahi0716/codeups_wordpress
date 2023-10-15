@@ -136,11 +136,11 @@ jQuery(function ($) {
 
 
   // ===============================================================
-  // アーカイブのアコーディオン
+  // ブログページ アーカイブのアコーディオン
   // ===============================================================
 
 jQuery('.js-sider-accordion').click(function () {
-  jQuery(this).children().slideToggle();
+  jQuery(this).next().slideToggle();
 
   jQuery(this).toggleClass('is-close');
 });
@@ -322,7 +322,7 @@ var windowSize = jQuery(window).width();
 
 jQuery(window).on("load", function () {
   var webStorage = function () {
-    if (!sessionStorage.getItem("access")) {
+    if (!sessionStorage.getItem("access") && location.pathname === '/codeups-shop/' ) {
       // /*初回アクセス時の処理*/
       sessionStorage.setItem("access", "true"); // sessionStorageにデータを保存
       loadingAnimation();

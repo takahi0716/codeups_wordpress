@@ -17,7 +17,7 @@
   <?php get_template_part('breadcrumb'); ?>
 
   <!-- 下層ページ -->
-  <section class="page-sitemap page-sitemap-layout ornament">
+  <section class="page-sitemap page-sitemap-layout">
     <div class="page-sitemap__inner inner">
       <div class="page-sitemap__lists lists">
         <!-- ページリスト -->

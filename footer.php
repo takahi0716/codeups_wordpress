@@ -1,4 +1,5 @@
 <?php
+$home = esc_url(home_url('/'));
 $contact = esc_url(home_url('/contact/'));
 ?>
 <!-- contact -->
@@ -56,8 +57,10 @@ $contact = esc_url(home_url('/contact/'));
   <div class="footer__inner inner">
     <div class="footer__wrapper">
       <div class="footer__logo">
-        <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/CodeUps-white-logo.svg"
-          alt="codeupsの会社ロゴ">
+        <a href="<?php echo $home; ?>" class="footer__logolink">
+          <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/CodeUps-white-logo.svg"
+            alt="codeupsのヘッダーロゴ">
+        </a>
       </div>
       <div class="footer__sns">
         <a href="https://ja-jp.facebook.com" class="footer__facebook" target="_blank">

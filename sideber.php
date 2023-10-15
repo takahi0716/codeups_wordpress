@@ -138,8 +138,7 @@ $contact = esc_url(home_url('/contact/'));
     <h2 class="sidebar__title sidebar-title">アーカイブ</h2>
     <div class="sidebar__archive-item">
 
-      <ul>
-        <?php
+      <?php
         $year_prev = null;
         $months = $wpdb->get_results("SELECT DISTINCT MONTH( post_date ) AS month ,
                                       YEAR( post_date ) AS year,
@@ -154,21 +153,20 @@ $contact = esc_url(home_url('/contact/'));
             if ($year_prev != null) { ?>
       </ul>
       <?php } ?>
-      <li class="sidebar__archive-year js-sider-accordion"><?php echo $month->year; ?>年
-        <ul>
-          <?php } ?>
-          <li>
-            <a
-              href="<?php bloginfo('url') ?>/<?php echo $month->year; ?>/<?php echo date("m", mktime(0, 0, 0, $month->month, 1, $month->year)) ?>">
-              <?php echo date("n", mktime(0, 0, 0, $month->month, 1, $month->year)) ?>月
-              (<?php echo $month->post_count; ?>)
-            </a>
-          </li>
-          <?php $year_prev = $year_current;
+      <div class="sidebar__archive-year js-sider-accordion">
+        <span><?php echo $month->year; ?>年</span>
+      </div>
+      <ul class="sidebar__archive-month">
+        <?php } ?>
+        <li>
+          <a
+            href="
+          <?php bloginfo('url') ?>/<?php echo $month->year; ?>/<?php echo date("m", mktime(0, 0, 0, $month->month, 1, $month->year)) ?>">
+            <?php echo date("n", mktime(0, 0, 0, $month->month, 1, $month->year)) ?>月
+          </a>
+        </li>
+        <?php $year_prev = $year_current;
           endforeach; ?>
-        </ul>
-      </li>
-      </ul>
 
     </div>
   </div>
