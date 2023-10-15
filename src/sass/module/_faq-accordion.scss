@@ -1,6 +1,6 @@
 @use "global" as *;
 
-.faq-accordion__title {
+.faq-accordion__question {
   padding: rem(16);
   color: $white;
   font-size: rem(16);
@@ -12,13 +12,13 @@
   margin-left: auto;
   margin-right: auto;
   @include mq(md){
-    padding: rem(26) rem(40);
+    padding: rem(26) rem(80) rem(26) rem(40);
     font-size: rem(20);
   }
 }
 
-.faq-accordion__title::before,
-.faq-accordion__title::after {
+.faq-accordion__question::before,
+.faq-accordion__question::after {
   content: '';
   display: block;
   background-color: $white;
@@ -33,24 +33,24 @@
   }
 }
 
-.faq-accordion__title::after {
+.faq-accordion__question::after {
   transform: rotate(0);
   transition-duration: .3s;
 }
 
-.faq-accordion__title::before {
+.faq-accordion__question::before {
   opacity: 0;
 }
 
-.faq-accordion__title.is-active::before {
+.faq-accordion__question.is-active::before {
   opacity: 1;
 }
 
-.faq-accordion__title.is-active::after {
+.faq-accordion__question.is-active::after {
   transform: rotate(90deg);
 }
 
-.faq-accordion__content {
+.faq-accordion__answer {
   border: rem(1) solid $accent-color;
   padding: rem(24) rem(16);
   margin-left: auto;
@@ -66,7 +66,7 @@
   }
 }
 
-.faq-accordion__content.is-close {
+.faq-accordion__answer.is-close {
   padding: 0 rem(16);
   line-height: 0;
   height: 0;

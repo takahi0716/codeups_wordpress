@@ -29,16 +29,42 @@
   margin-top: rem(24);
 }
 
-.sidebar__archive-item ul {
-  list-style: url(../../assets/images/common/Polygon1.svg);
-  list-style-position: inside;
-}
-
-.sidebar__archive-item li {
+.sidebar__archive-year,
+.sidebar__archive-month {
   margin-top: rem(4);
   font-size: rem(24);
+  position: relative;
+  padding-left: rem(32);
+
 }
 
-.sidebar__archive-item li ul {
-  text-indent: 1em;
+.sidebar__archive-year::before {
+  border-color: #408f95 transparent transparent transparent;
+  border-style: solid;
+  border-width: 19px 10px 0 10px;
+  content: "";
+  display: inline-block;
+  height: 0;
+  left: 0.3125rem;
+  position: absolute;
+  top: 0.625rem;
+  transition: all 0.3s;
+  width: 0;
+}
+
+
+.sidebar__archive-year.is-close::before,
+.sidebar__archive-month::before {
+  border-color: #408f95 transparent transparent transparent;
+  border-style: solid;
+  border-width: 19px 10px 0 10px;
+  content: "";
+  display: inline-block;
+  height: 0;
+  left: 0.3125rem;
+  position: absolute;
+  top: 0.625rem;
+  transform: rotate(-90deg);
+  transition: 0.3s;
+  width: 0;
 }

@@ -29,6 +29,8 @@ dd {
 /* Set core root defaults */
 html {
   scroll-behavior: smooth;
+  // ヘッダーを考慮し自動でスクロールする際は200px下の位置で止める
+  scroll-padding-top: 150px;
 }
 
 /* Set core body defaults */

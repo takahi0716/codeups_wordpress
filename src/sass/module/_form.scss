@@ -80,6 +80,22 @@ input[type="tel"]::placeholder {
   }
 }
 
+// WordPressカスタマイズ
+.wpcf7-checkbox  {
+  margin-top: rem(16);
+  display: flex;
+  flex-direction: column;
+  gap: rem(4);
+
+  @include mq(md) {
+    margin-top: 0;
+  }
+}
+
+.wpcf7-list-item{
+  margin: 0;
+}
+
 .form__checkbox label {
   display: flex;
   gap: rem(8);
@@ -197,7 +213,6 @@ input[type="checkbox"]:checked::after {
 
 .form__checkbox-agree label span {
   display: inline-block;
-  width: calc(252 / 345 * 100%);
 
   @include mq(md) {
     display: inline;
@@ -225,7 +240,11 @@ input[type="checkbox"]:checked::after {
   background-color: rgba(201, 72, 0, 0.20);
 }
 
-.form__checkbox.is-error,
-.form__checkbox-agree.is-error label span {
+.form__checkbox.is-error  label span,
+#agree.is-error .wpcf7-list-item-label {
   background-color: rgba(201, 72, 0, 0.20);
+}
+
+.wpcf7-spinner{
+  display: none;
 }

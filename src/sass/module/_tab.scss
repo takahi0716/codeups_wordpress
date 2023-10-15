@@ -7,8 +7,9 @@
   place-content: center;
 
   @include mq(md) {
-    gap: 0 rem(32);
-    grid-template-columns: repeat(4,1fr);
+    gap: rem(16) rem(32);
+    // grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4,rem(162));
     place-content: inherit;
   }
 }

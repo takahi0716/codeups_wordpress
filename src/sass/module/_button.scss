@@ -63,6 +63,7 @@
 }
 
 .button::after {
+  // 左からスライド
   content: "";
   background-color: $white;
   position: absolute;
@@ -77,22 +78,22 @@
 }
 
 .button:hover {
-  cursor: pointer;
+
   color: $accent-color;
 }
 
 .button:hover::after {
-  cursor: pointer;
+
   transform: scale(1, 1);
 }
 
 .button__text:hover::before {
-  cursor: pointer;
+
   border-bottom: rem(1) solid $accent-color;
 }
 
 .button__text:hover::after {
-  cursor: pointer;
+
   border-bottom: rem(1) solid $accent-color;
 }
 
@@ -131,4 +132,18 @@
 .button--white .button__text:hover::after {
   cursor: pointer;
   border-bottom: rem(1) solid $white;
+}
+
+.button__text--submit {
+  padding: 0;
+}
+
+.button__submit {
+  padding: rem(16) rem(88) rem(16) rem(40);
+  color: $white !important;
+  transition: 0.2s;
+}
+
+.button__submit:hover {
+  color: $accent-color !important;
 }

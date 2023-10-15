@@ -134,8 +134,18 @@ jQuery(function ($) {
     }
   });
 
+
   // ===============================================================
-  // 問い合わせフォームの入力チェック
+  // アーカイブのアコーディオン
+  // ===============================================================
+
+jQuery('.js-sider-accordion').click(function () {
+  jQuery(this).children().slideToggle();
+
+  jQuery(this).toggleClass('is-close');
+});
+  // ===============================================================
+  // よくある質問のアコーディオン
   // ===============================================================
 
   $(function () {
@@ -144,7 +154,9 @@ jQuery(function ($) {
       $(this).toggleClass("is-active");
     });
   });
-
+  // ===============================================================
+  // 問い合わせフォームの入力チェック
+  // ===============================================================
   $("#submit_btn").on("click", function () {
     // エラー表示をリセット
     $("#your-name").removeClass("is-error");
@@ -152,8 +164,9 @@ jQuery(function ($) {
     $("#tel").removeClass("is-error");
     $("#contents").removeClass("is-error");
     $(".form__checkbox").removeClass("is-error");
-    $("#form-campaign").removeClass("is-error");
-    $(".form__checkbox-agree").removeClass("is-error");
+
+    // $(".form__checkbox-agree").removeClass("is-error");
+    $("#agree").removeClass("is-error");
     $(".form__error").removeClass("is-error");
 
     if ($("#your-name").val() === "") {
@@ -173,7 +186,7 @@ jQuery(function ($) {
       $(".form__error").addClass("is-error");
     }
 
-    var checkBoxes = $("input[name='contact-item']");
+    var checkBoxes = $("input[name='checkbox-367[]']");
     var isChecked = false;
 
     checkBoxes.each(function () {
@@ -188,8 +201,18 @@ jQuery(function ($) {
       $(".form__error").addClass("is-error");
     }
 
-    if (!$("#agree").prop("checked")) {
-      $(".form__checkbox-agree").addClass("is-error");
+    var checkAgree = $("input[name='checkbox-993[]']");
+    var isCheckedAgree = false;
+
+    checkAgree.each(function () {
+      if ($(this).prop("checked")) {
+        isCheckedAgree = true;
+        return false; // ループを終了します
+      }
+    });
+
+    if (!isCheckedAgree) {
+      $("#agree").addClass("is-error");
       $(".form__error").addClass("is-error");
     }
 
@@ -201,7 +224,8 @@ jQuery(function ($) {
       isChecked &&
       $("#agree").prop("checked")
     ) {
-      window.location.href = "../page-thanks.html";
+      // window.location.href = "../page-thanks.html";  
+
     }
   });
 
@@ -294,9 +318,9 @@ const tl = gsap.timeline();
 const title = document.querySelector(".loading__title");
 const loading = document.querySelector(".loading");
 
-var windowSize = $(window).width();
+var windowSize = jQuery(window).width();
 
-$(window).on("load", function () {
+jQuery(window).on("load", function () {
   var webStorage = function () {
     if (!sessionStorage.getItem("access")) {
       // /*初回アクセス時の処理*/
@@ -304,7 +328,7 @@ $(window).on("load", function () {
       loadingAnimation();
     } else {
       // /*2回目以降アクセス時の処理*/
-      $(".loading").addClass("is-action");
+      jQuery(".loading").addClass("is-action");
     }
   };
   webStorage();
@@ -314,7 +338,7 @@ $(window).on("load", function () {
 // ローディングアニメーション
 // ===============================================================
 function loadingAnimation() {
-  $("body").css("overflow", "hidden");
+  jQuery("body").css("overflow", "hidden");
   tl
     // 左の画像を上げる
     .to(".loading__image-left", {
@@ -323,7 +347,7 @@ function loadingAnimation() {
       ease: "power4.out",
       delay: 1,
       onstart: () => {
-        $("body").css("overflow", "hidden");
+        jQuery("body").css("overflow", "hidden");
       },
     })
     // 右の画像を上げる
@@ -349,8 +373,7 @@ function loadingAnimation() {
 
         onComplete: () => {
           // アニメーションがおわったら消してスクロールを可能にする
-          // $(".loading").css("display", "none");
-          $("body").css("overflow", "auto");
+          jQuery("body").css("overflow", "auto");
         },
       },
       ">2"

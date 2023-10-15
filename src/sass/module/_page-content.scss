@@ -3,7 +3,7 @@
 .page-content{
 }
 
-.page-content__title{
+.page-content h2{
   font-size:rem(24);
   font-weight: 500;
   @include mq(md) {
@@ -11,22 +11,22 @@
   }
 
 }
-.page-content__text{
+.page-content p{
   line-height: 2; /* 200% */
 }
-.page-content__text:first-of-type{
+.page-content p:first-of-type{
   margin-top: rem(40);
 }
 
-.page-content__text:not(:first-of-type){
+.page-content p:not(:first-of-type){
   margin-top: rem(32);
 
 }
-.page-content__list{
+.page-content ul{
   margin-top: rem(32);
 }
 
-.page-content__list li{
+.page-content ul li{
   text-indent: -1em;
   padding-left: 1em;
   line-height: 2; /* 200% */

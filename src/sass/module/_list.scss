@@ -33,6 +33,6 @@
 .list__item:hover {
   opacity: 0.8;
 }
-.lists__item .list__item--image::before {
+.page-sitemap__lists .list__item:first-child::before {
   background-image: url(../images/common/seastar_list.png);
 }
