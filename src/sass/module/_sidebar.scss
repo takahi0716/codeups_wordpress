@@ -46,8 +46,7 @@
   padding-left: rem(32);
 }
 
-.sidebar__archive-year::before,
-.sidebar__archive-month li::before {
+.sidebar__archive-year::before{
   border-color: #408f95 transparent transparent transparent;
   border-style: solid;
   border-width: 19px 10px 0 10px;
@@ -58,7 +57,7 @@
   position: absolute;
   top: 0.625rem;
   transition: all 0.3s;
-  transform: rotate(-90deg);
+  transform: rotate(0deg);
   width: 0;
 }
 
@@ -73,7 +72,22 @@
   left: 0.3125rem;
   position: absolute;
   top: 0.625rem;
-  transform: rotate(0deg);
+  transform: rotate(-90deg);
+  transition: 0.3s;
+  width: 0;
+}
+
+.sidebar__archive-month li::before {
+  border-color: #408f95 transparent transparent transparent;
+  border-style: solid;
+  border-width: 19px 10px 0 10px;
+  content: "";
+  display: inline-block;
+  height: 0;
+  left: 0.3125rem;
+  position: absolute;
+  top: 0.625rem;
+  transform: rotate(-90deg);
   transition: 0.3s;
   width: 0;
 }
