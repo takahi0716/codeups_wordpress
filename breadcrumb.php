@@ -1,4 +1,3 @@
-  <!-- パンくずリスト -->
   <div class="breadcrumb breadcrumb-layout">
     <div class="breadcrumb__inner inner">
       <?php

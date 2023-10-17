@@ -25,9 +25,11 @@ $contact = esc_url(home_url('/contact/'));
       <a href="<?php echo get_permalink(); ?>" class="popular-cards__item popular-card">
 
         <div class="popular-card__image">
-          <?php if (has_post_thumbnail()) {
-                the_post_thumbnail('post-thumbnail');
-              } ?>
+          <?php if (get_the_post_thumbnail()) : ?>
+          <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title() ?>のアイキャッチ画像">
+          <?php else : ?>
+          <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/no-image.jpg" alt="noimage">
+          <?php endif; ?>
         </div>
         <div class="popular-card__body">
           <time class="popular-card__time" datetime="<?php the_time('c'); ?>"><?php the_time('Y.m.d'); ?></time>
@@ -88,7 +90,7 @@ $contact = esc_url(home_url('/contact/'));
         'post_type' => 'campaign',
         'post_status' => 'publish', // 公開済の投稿を指定
         'posts_per_page' => 2,
-        'orderby' => 'menu_order', // 順序順で表示
+        'orderby' => 'post_date',
         'order' => 'DESC',
       );
       $the_view_query = new WP_Query($args);

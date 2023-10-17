@@ -111,12 +111,7 @@ function setPostViews($postID)
     $count++;
     update_post_meta($postID, $count_key, $count);
   }
-  // デバッグ start
-  echo '';
-  echo 'console.log("postID: ' . $postID . '");';
-  echo 'console.log("カウント: ' . $count . '");';
-  echo '';
-  // デバッグ end
+
 }
 remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 

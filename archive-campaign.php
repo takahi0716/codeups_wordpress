@@ -24,7 +24,7 @@ $contact = esc_url(home_url('/contact/'));
     <div class="archive-campaign__inner inner">
       <div class="archive-campaign__tab tab">
         <span class="tab__text is-active">ALL</span>
-        <?php $terms = get_terms('campaign__category', 'hide_empty=0'); //空のタームも出力 
+        <?php $terms = get_terms('campaign__category'); 
         ?>
         <?php foreach ($terms as $term) : ?>
 

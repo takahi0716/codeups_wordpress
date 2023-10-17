@@ -118,6 +118,11 @@ $termsOfService = esc_url(home_url('/terms-of-service/'));
     </ul>
     <ul class="lists__item list">
       <li class="list__item">
+        <a href="<?php echo $sitemap; ?>">サイトマップ</a>
+      </li>
+    </ul>
+    <ul class="lists__item list">
+      <li class="list__item">
         <a href="<?php echo $contact; ?>">お問い合わせ</a>
       </li>
     </ul>
