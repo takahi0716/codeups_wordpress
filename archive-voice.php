@@ -12,7 +12,9 @@
     <h1 class="sub-mv__title">voice</h1>
   </section>
   <!-- パンくずリスト -->
-  <?php get_template_part('breadcrumb'); ?>
+  <div class="breadcrumb-layout">
+    <?php get_template_part('parts/breadcrumb'); ?>
+  </div>
 
   <!-- 下層ページ -->
   <section class="archive-voice-layout archive-voice ornament">
@@ -32,42 +34,43 @@
         <?php if (have_posts()) :
           while (have_posts()) :
             the_post(); ?>
-
-        <?php
-            $guest = get_field('guest');
-            ?>
-        <div class="voice-cards__item voice-card">
-          <div class="voice-card__header">
-            <div class="voice-card__wrapper">
-              <div class="voice-card__container">
-                <p class="voice-card__guest">
-                  <?php if ($guest) : ?>
-                  <?php echo $guest; ?>
+        <div class="voice-cards__item">
+          <div class="voice-card">
+            <div class="voice-card__header">
+              <div class="voice-card__wrapper">
+                <div class="voice-card__container">
+                  <?php 
+                  $guset_group = get_field('guest_group');
+                  if ($guset_group) :
+                  $age = $guset_group['age'];
+                  $gender = $guset_group['gender'];
+                  ?>
+                  <p class="sidebar-voice__guest"><?php echo $age,'(',$gender,')'; ?></p>
                   <?php endif; ?>
-                </p>
-                <p class="voice-card__category">
-                  <?php
+                  <p class="voice-card__category">
+                    <?php
                       $terms = get_the_terms($post->ID, 'voice_category');
                       if ($terms) {
                         echo $terms[0]->name;
                       }
                       ?>
-                </p>
+                  </p>
+                </div>
+                <h2 class="voice-card__title"><?php the_title(); ?></h2>
               </div>
-              <h2 class="voice-card__title"><?php the_title(); ?></h2>
+              <div class="voice-card__image colorbox js-colorbox">
+                <?php if (get_the_post_thumbnail()) : ?>
+                <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title() ?>の画像">
+                <?php else : ?>
+                <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/no-image.jpg" alt="noimage">
+                <?php endif; ?>
+              </div>
             </div>
-            <div class="voice-card__image colorbox js-colorbox">
-              <?php if (get_the_post_thumbnail()) : ?>
-              <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title() ?>の画像">
-              <?php else : ?>
-              <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/no-image.jpg" alt="noimage">
-              <?php endif; ?>
-            </div>
-          </div>
 
-          <p class="voice-card__text">
-            <?php the_content(); ?>
-          </p>
+            <p class="voice-card__text">
+              <?php the_content(); ?>
+            </p>
+          </div>
         </div>
         <?php endwhile;
         endif; ?>

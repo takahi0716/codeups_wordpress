@@ -14,22 +14,26 @@
   </section>
 
   <!-- パンくずリスト -->
-  <?php get_template_part('breadcrumb'); ?>
+  <div class="breadcrumb-layout">
+    <?php get_template_part('parts/breadcrumb'); ?>
+  </div>
 
   <!-- 下層ページ -->
   <section class="page-faq-layout page-faq ornament">
     <div class="page-faq__inner inner">
       <div class="page-faq__wapper one-column one-column--faq">
-        <?php $faqGroup = SCF::get('faq_group'); foreach ( $faqGroup as $fields ) :
-        if($fields['faq_question'] !== "" and $fields['faq_answer']!== ""):
-          ?>
+        <?php $faqGroup = SCF::get_option_meta('faq','faq_group');
+        foreach ($faqGroup as $fields) :
+          if ($fields['faq_question'] !== "" and $fields['faq_answer'] !== "") :
+        ?>
         <div class="page-faq__accordion faq-accordion">
           <h2 class="faq-accordion__question js-accordion"><?php echo $fields['faq_question']; ?></h2>
           <div class="faq-accordion__answer">
             <?php echo $fields['faq_answer']; ?>
           </div>
         </div>
-        <?php endif;endforeach; ?>
+        <?php endif;
+        endforeach; ?>
       </div>
     </div>
   </section>

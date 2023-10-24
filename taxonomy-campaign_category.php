@@ -25,14 +25,18 @@ $contact = esc_url(home_url('/contact/'));
   <div class="archive-campaign archive-campaign-layout ornament">
     <div class="archive-campaign__inner inner">
       <div class="archive-campaign__tab tab">
-        <span class="tab__text is-active">ALL</span>
-        <?php $terms = get_terms('campaign_category');
+        <a href="<?php echo esc_url(home_url('/campaign/')); ?>" class="tab__text">ALL</a>
+        <?php $term_id = get_queried_object_id(); // タームIDの取得
         ?>
-        <?php foreach ($terms as $term) : ?>
-
+        <?php $terms = get_terms('campaign_category', 'hide_empty=0'); //空のタームも出力 
+        ?>
+        <?php foreach ($terms as $term) :
+          if ($term->term_id == $term_id) : ?>
+        <span class="tab__text is-active"><?php echo $term->name; ?></span>
+        <?php else : ?>
         <a href="<?php echo get_term_link($term->term_id); ?>" class="tab__text"><?php echo $term->name; ?></a>
-
-        <?php endforeach; ?>
+        <?php endif;
+        endforeach; ?>
       </div>
       <div class="archive-campaign__cards archive-campaign-cards">
         <?php if (have_posts()) :
@@ -40,7 +44,6 @@ $contact = esc_url(home_url('/contact/'));
             the_post(); ?>
 
         <?php
-
             $previous = get_field('previous');
             $current = get_field('price-current');
             $card__text = get_field('campaign-card__text');
@@ -60,11 +63,11 @@ $contact = esc_url(home_url('/contact/'));
                 <p class="card__category">
                 <div class="campaign-card__category">
                   <?php
-                    $terms = get_the_terms($post->ID, 'campaign_category');
-                    if ($terms) {
-                      echo $terms[0]->name;
-                    }
-                    ?>
+                      $terms = get_the_terms($post->ID, 'campaign_category');
+                      if ($terms) {
+                        echo $terms[0]->name;
+                      }
+                      ?>
                 </div>
                 <h2 class="campaign-card__title campaign-card__title--sub">
                   <?php the_title(); ?></h2>

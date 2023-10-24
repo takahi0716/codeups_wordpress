@@ -5,8 +5,7 @@
   <section class="sub-mv">
     <picture class="sub-mv__image">
       <!-- ↓幅768px以下で表示↓ -->
-      <source srcset="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/information-sp.jpg"
-        media="(max-width: 767px)" />
+      <source srcset="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/information-sp.jpg" media="(max-width: 767px)" />
       <!-- ↓上記全て表示条件に当てはまらない場合に表示↓ -->
       <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/information-pc.jpg" alt="ダイバーの写真">
     </picture>
@@ -14,7 +13,9 @@
   </section>
 
   <!-- パンくずリスト -->
-  <?php get_template_part('breadcrumb'); ?>
+  <div class="breadcrumb-layout">
+    <?php get_template_part('parts/breadcrumb'); ?>
+  </div>
 
   <!-- 下層ページ -->
   <section class="information-sub page-information-layout ornament">

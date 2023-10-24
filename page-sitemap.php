@@ -14,14 +14,16 @@
   </section>
 
   <!-- パンくずリスト -->
-  <?php get_template_part('breadcrumb'); ?>
+  <div class="breadcrumb-layout">
+    <?php get_template_part('parts/breadcrumb'); ?>
+  </div>
 
   <!-- 下層ページ -->
   <section class="page-sitemap page-sitemap-layout">
     <div class="page-sitemap__inner inner">
-      <div class="page-sitemap__lists lists">
+      <div class="page-sitemap__lists">
         <!-- ページリスト -->
-        <?php get_template_part('page-list'); ?>
+        <?php get_template_part('parts/lists'); ?>
       </div>
 
     </div>

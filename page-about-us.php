@@ -14,7 +14,9 @@
   </section>
 
   <!-- パンくずリスト -->
-  <?php get_template_part('breadcrumb'); ?>
+  <div class="breadcrumb-layout">
+    <?php get_template_part('parts/breadcrumb'); ?>
+  </div>
   <!-- 下層ページ -->
   <section class="page-about-layout about ornament">
     <div class="about__inner inner">
@@ -55,7 +57,7 @@
       </div>
 
       <div class="gallery__container tile">
-        <?php $imgGroup = SCF::get('AboutUs');
+        <?php $imgGroup = SCF::get_option_meta('gallery','AboutUs');
         foreach ($imgGroup as $fields) :
           $imgurl = wp_get_attachment_image_src($fields['aboutus_image'], 'large');
         ?>

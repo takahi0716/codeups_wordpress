@@ -36,8 +36,9 @@ $contact = esc_url(home_url('/contact/'));
         </p>
         <div class="contact__wrapper">
           <!-- button -->
-          <a href="<?php echo $contact; ?>" class="contact__button button"><span class="button__text">Contact
-              us</span></a>
+          <div class="contact__button">
+            <a href="<?php echo $contact; ?>" class="button"><span class="button__text">Contact us</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -71,9 +72,9 @@ $contact = esc_url(home_url('/contact/'));
         </a>
       </div>
     </div>
-    <div class="footer__lists lists">
+    <div class="footer__lists">
       <!-- ページリスト -->
-      <?php get_template_part('page-list'); ?>
+      <?php get_template_part('parts/lists'); ?>
     </div>
   </div>
   <p class="footer__copyright">Copyright &copy; 2021 - 2023 CodeUps LLC. All Rights Reserved.</p>

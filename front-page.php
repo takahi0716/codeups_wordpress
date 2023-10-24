@@ -32,39 +32,21 @@ $privacypolicy = esc_url(home_url('/privacypolicy/'));
   <!-- メインビュー -->
   <div class="top-mv mv">
     <div class="mv_slide slide">
-      <picture class="slide__image">
-        <!-- ↓幅768px以下で表示↓ -->
-        <source srcset="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-turtle-sp.jpg"
-          media="(max-width: 767px)" />
-        <!-- ↓上記全て表示条件に当てはまらない場合に表示↓ -->
-        <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-turtle-pc.jpg" alt="黄色い熱帯魚の写真">
-      </picture>
+      <?php
+      $mv_image_group = SCF::get('mv_image_group');
+      foreach ($mv_image_group as $fields) :
+                if ($fields['sp_mv_image'] !== "" and $fields['pc_mv_image'] !== "") :
+              ?>
 
       <picture class="slide__image">
         <!-- ↓幅768px以下で表示↓ -->
-        <source srcset="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-diver-sp.jpg"
-          media="(max-width: 767px)" />
+        <source srcset="<?php echo wp_get_attachment_url($fields['sp_mv_image']); ?>" media="(max-width: 767px)" />
         <!-- ↓上記全て表示条件に当てはまらない場合に表示↓ -->
-        <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-diver-pc.jpg" alt="黄色い熱帯魚の写真">
+        <img src="<?php echo wp_get_attachment_url($fields['pc_mv_image']); ?>"
+          alt="<?php echo $fields['alt-text']; ?>">
       </picture>
-
-      <picture class="slide__image">
-        <!-- ↓幅768px以下で表示↓ -->
-        <source srcset="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-ship-sp.jpg"
-          media="(max-width: 767px)" />
-        <!-- ↓上記全て表示条件に当てはまらない場合に表示↓ -->
-        <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-ship-pc.jpg" alt="黄色い熱帯魚の写真">
-      </picture>
-
-      <picture class="slide__image">
-        <!-- ↓幅768px以下で表示↓ -->
-        <source srcset="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-beach-sp.jpg"
-          media="(max-width: 767px)" />
-        <!-- ↓上記全て表示条件に当てはまらない場合に表示↓ -->
-        <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/mv-beach-pc.jpg" alt="黄色い熱帯魚の写真">
-      </picture>
-
-
+      <?php endif; ?>
+      <?php endforeach; ?>
     </div>
     <div class="mv__title">
       <p class="mv__main">DIVING</p>
@@ -96,66 +78,72 @@ $privacypolicy = esc_url(home_url('/privacypolicy/'));
         <div class="campaign__swiper-wrapper swiper-wrapper">
 
           <?php
-      $args = array(
-        'post_type' => 'campaign',
-        'post_status' => 'publish', // 公開済の投稿を指定
-        'posts_per_page' => -1,
-        'orderby' => 'menu_order', // 順序順で表示
-        'order' => 'DESC',
-      );
-      $the_view_query = new WP_Query($args);
-      if ($the_view_query->have_posts()) :
-        while ($the_view_query->have_posts()) : $the_view_query->the_post();
-      ?>
+          $args = array(
+            'post_type' => 'campaign',
+            'post_status' => 'publish', // 公開済の投稿を指定
+            'posts_per_page' => -1,
+            'orderby' => 'menu_order', // 順序順で表示
+            'order' => 'DESC',
+          );
+          $the_view_query = new WP_Query($args);
+          if ($the_view_query->have_posts()) :
+            while ($the_view_query->have_posts()) : $the_view_query->the_post();
+          ?>
           <div class="campaign__cards swiper-slide">
             <!-- campaign-card -->
-            <div class="campaign__card campaign-card">
-              <figure class="campaign-card__img">
-                <?php if (has_post_thumbnail()) {
-                the_post_thumbnail('post-thumbnail');
-              } ?>
-              </figure>
-              <div class="campaign-card__inner">
-                <div class="campaign-card__body">
-                  <div class="campaign-card__category">
+            <div class="campaign__card">
+              <div class="campaign-card">
+                <figure class="campaign-card__img">
+                  <?php if (get_the_post_thumbnail()) : ?>
+                  <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title() ?>の画像">
+                  <?php else : ?>
+                  <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/no-image.jpg" alt="noimage">
+                  <?php endif; ?>
+                </figure>
+                <div class="campaign-card__inner">
+                  <div class="campaign-card__body">
                     <?php
-                    $terms = get_the_terms($post->ID, 'campaign__category');
-                    if ($terms) {
-                      echo $terms[0]->name;
-                    }
-                    ?>
+                          $terms = get_the_terms($post->ID, 'campaign_category');
+                          if ($terms) { ?>
+                    <div class="campaign-card__category">
+
+                      <?php echo $terms[0]->name; ?>
+
+                    </div>
+                    <?php } ?>
+                    <h3 class="campaign-card__title "><?php the_title(); ?></h3>
                   </div>
-                  <h3 class="campaign-card__title "><?php the_title(); ?></h3>
-                </div>
-                <div class="campaign-card__price">
-                  <p class="campaign-card__person">
-                    全部コミコミ(お一人様)
-                  </p>
-                  <p class="campaign-card__price-text">
-                    <?php
-                  $previous = get_field('previous');
-                  $current = get_field('price-current');
-                  ?>
-                    <?php if ($previous) : ?>
-                    <span class="campaign-card__price-previous"><?php echo $previous; ?></span>
-                    <?php endif; ?>
-                    <?php if ($current) : ?>
-                    <span class="campaign-card__price-current"><?php echo $current; ?></span>
-                    <?php endif; ?>
-                  </p>
+                  <div class="campaign-card__price">
+                    <p class="campaign-card__person">
+                      全部コミコミ(お一人様)
+                    </p>
+                    <p class="campaign-card__price-text">
+                      <?php
+                          $price_group = get_field('campaign_price-group');
+                          if ($price_group) :
+                          $previous_price = $price_group['previous_price'];
+                          $current_price = $price_group['current_price'];
+                          ?>
+                      <span class="campaign-card__price-previous"><?php echo $previous_price; ?></span>
+                      <span class="campaign-card__price-current"><?php echo $current_price; ?></span>
+                      <?php endif; ?>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <?php endwhile; ?>
-          <?php endif; ?>
           <?php wp_reset_postdata(); ?>
+          <?php endif; ?>
         </div>
       </div>
       <div class="campaign__wrapper">
-        <!-- button -->
-        <a href="<?php echo $campaign; ?>" class="information__button button"><span class="button__text">View
-            more</span></a>
+        <div class="information__button">
+          <!-- button -->
+          <a href="<?php echo $campaign; ?>" class="button"><span class="button__text">View
+              more</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -190,7 +178,7 @@ $privacypolicy = esc_url(home_url('/privacypolicy/'));
             </p>
             <div class="about__wrapper">
               <!-- button -->
-              <a href="<?php echo $about; ?>" class="about__button button"><span class="button__text">View
+              <a href="<?php echo $about; ?>" class="button"><span class="button__text">View
                   more</span></a>
             </div>
           </div>
@@ -219,7 +207,7 @@ $privacypolicy = esc_url(home_url('/privacypolicy/'));
 
           <div class="information__wrapper">
             <!-- button -->
-            <a href="<?php echo $information; ?>" class="information__button button"><span class="button__text">View
+            <a href="<?php echo $information; ?>" class="button"><span class="button__text">View
                 more</span></a>
           </div>
         </div>
@@ -241,41 +229,27 @@ $privacypolicy = esc_url(home_url('/privacypolicy/'));
       <div class="blog__cards article-cards">
 
         <?php
-      $args = array(
-        'post_type' => 'post',
-        'post_status' => 'publish', // 公開済の投稿を指定
-        'posts_per_page' => 3,
-        'orderby' => 'post_date',
-        'order' => 'DESC',
-      );
-      $the_view_query = new WP_Query($args);
-      if ($the_view_query->have_posts()) :
-        while ($the_view_query->have_posts()) : $the_view_query->the_post();
-      ?>
-
-        <a href="<?php the_permalink(); ?>" class="article-cards__item article-card">
-          <figure class="article-card__img">
-            <?php if (get_the_post_thumbnail()) : ?>
-            <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title() ?>の画像">
-            <?php else : ?>
-            <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/no-image.jpg" alt="noimage">
-            <?php endif; ?>
-          </figure>
-          <div class="article-card__body">
-            <time class="article-card__time" datetime="<?php the_time('c'); ?>"><?php the_time('Y.m.d'); ?></time>
-            <h3 class="article-card__title "><?php the_title(); ?></h3>
-            <p class="article-card__text">
-              <?php the_excerpt(); ?>
-            </p>
-          </div>
-        </a>
+        $args = array(
+          'post_type' => 'post',
+          'post_status' => 'publish', // 公開済の投稿を指定
+          'posts_per_page' => 3,
+          'orderby' => 'post_date',
+          'order' => 'DESC',
+        );
+        $the_view_query = new WP_Query($args);
+        if ($the_view_query->have_posts()) :
+          while ($the_view_query->have_posts()) : $the_view_query->the_post();
+        ?>
+        <div class="article-cards__item">
+          <?php get_template_part('parts/article-card'); ?>
+        </div>
         <?php endwhile; ?>
         <?php endif; ?>
         <?php wp_reset_postdata(); ?>
       </div>
       <div class="blog__wrapper">
         <!-- button -->
-        <a href="<?php echo $blog; ?>" class="blog__button button"><span class="button__text">View more</span></a>
+        <a href="<?php echo $blog; ?>" class="button"><span class="button__text">View more</span></a>
       </div>
     </div>
   </section>
@@ -290,59 +264,62 @@ $privacypolicy = esc_url(home_url('/privacypolicy/'));
       <div class="voice__cards voice-cards">
 
         <?php
-      $args = array(
-        'post_type' => 'voice',
-        'post_status' => 'publish', // 公開済の投稿を指定
-        'posts_per_page' => 2,
-        'orderby' => 'post_date',
-        'order' => 'DESC',
-      );
-      $the_view_query = new WP_Query($args);
-      if ($the_view_query->have_posts()) :
-        while ($the_view_query->have_posts()) : $the_view_query->the_post();
-      ?>
-
-        <div class="voice-cards__item voice-card">
-          <div class="voice-card__header">
-            <div class="voice-card__wrapper">
-              <div class="voice-card__container">
-                <?php $guest = get_field('guest'); ?>
-                <?php if ($guest) : ?>
-                <p class="sidebar-voice__guest"><?php echo $guest; ?></p>
-                <?php endif; ?>
-                <p class="voice-card__category">
-                  <?php
-                      $terms = get_the_terms($post->ID, 'voice_category');
-                      if ($terms) {
-                        echo $terms[0]->name;
-                      }
-                      ?>
-                </p>
+        $args = array(
+          'post_type' => 'voice',
+          'post_status' => 'publish', // 公開済の投稿を指定
+          'posts_per_page' => 2,
+          'orderby' => 'post_date',
+          'order' => 'DESC',
+        );
+        $the_view_query = new WP_Query($args);
+        if ($the_view_query->have_posts()) :
+          while ($the_view_query->have_posts()) : $the_view_query->the_post();
+        ?>
+        <div class="voice-cards__item">
+          <div class="voice-card">
+            <div class="voice-card__header">
+              <div class="voice-card__wrapper">
+                <div class="voice-card__container">
+                  <?php 
+                  $guset_group = get_field('guest_group');
+                  if ($guset_group) :
+                  $age = $guset_group['age'];
+                  $gender = $guset_group['gender'];
+                  ?>
+                  <p class="sidebar-voice__guest"><?php echo $age,'(',$gender,')'; ?></p>
+                  <?php endif; ?>
+                  <p class="voice-card__category">
+                    <?php
+                        $terms = get_the_terms($post->ID, 'voice_category');
+                        if ($terms) {
+                          echo $terms[0]->name;
+                        }
+                        ?>
+                  </p>
+                </div>
+                <h3 class="voice-card__title"><?php the_title(); ?></h3>
               </div>
-              <h3 class="voice-card__title"><?php the_title(); ?></h3>
+              <div class="voice-card__image colorbox js-colorbox">
+                <?php if (get_the_post_thumbnail()) : ?>
+                <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title() ?>の画像">
+                <?php else : ?>
+                <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/no-image.jpg" alt="noimage">
+                <?php endif; ?>
+              </div>
             </div>
-            <div class="voice-card__image colorbox js-colorbox">
-              <?php if (get_the_post_thumbnail()) : ?>
-              <img src="<?php the_post_thumbnail_url('full'); ?>" alt="<?php the_title() ?>の画像">
-              <?php else : ?>
-              <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/no-image.jpg" alt="noimage">
-              <?php endif; ?>
-            </div>
-          </div>
 
-          <p class="voice-card__text">
-            <?php echo wp_trim_words( get_the_content(), 196, '[…]' ); ?>
-          </p>
+            <p class="voice-card__text">
+              <?php echo wp_trim_words(get_the_content(), 196, '[…]'); ?>
+            </p>
+          </div>
         </div>
         <?php endwhile; ?>
-        <?php endif; ?>
         <?php wp_reset_postdata(); ?>
-
-
+        <?php endif; ?>
       </div>
       <div class="voice__wrapper">
         <!-- button -->
-        <a href="<?php echo $voice; ?>" class="voice__button button"><span class="button__text">View more</span></a>
+        <a href="<?php echo $voice; ?>" class="button"><span class="button__text">View more</span></a>
       </div>
     </div>
   </section>
@@ -363,64 +340,66 @@ $privacypolicy = esc_url(home_url('/privacypolicy/'));
           <img src="<?php echo get_theme_file_uri(); ?>/dist/assets/images/common/priceimg.jpg" alt=黄色い熱帯魚の写真">
         </picture>
         <div class="price__contaner">
-
-          <?php
-	$price_id = get_page_by_path('price');
-	$price_id = $price_id->ID; //ページIDを取得して$page_idに代入
-?>
-
-          <?php $license_price = SCF::get('license_price_group',$price_id); if($license_price[0]['license_course_name']): ?>
+          <?php $license_group = SCF::get_option_meta('price_option','license');
+        if ($license_group[0]['license_course_name']) : ?>
           <div class="price__list data-list">
             <h3 class="data-list__title"><span>ライセンス講習</span></h3>
             <dl class="data-list__data">
-              <?php foreach ( $license_price as $fields ) :
-        if($fields['license_course_name'] !== "" and $fields['license_course_price']!== ""):
-          ?>
+              <?php foreach ($license_group as $fields) :
+                  if ($fields['license_course_name'] !== "" and $fields['license_course_price'] !== "") :
+                ?>
               <dt><?php echo $fields['license_course_name']; ?></dt>
               <dd><?php echo $fields['license_course_price']; ?></dd>
-              <?php endif;endforeach; ?>
+              <?php endif;
+                endforeach; ?>
             </dl>
           </div>
           <?php endif; ?>
 
-          <?php $experience_price = SCF::get('experience_price_group',$price_id); if($experience_price[0]['experience_course_name']): ?>
+          <?php $experience_group = SCF::get_option_meta('price_option','experience');
+          if ($experience_group[0]['experience_course_name']) : ?>
           <div class="price__list data-list">
             <h3 class="data-list__title"><span>体験ダイビング</span></h3>
             <dl class="data-list__data">
-              <?php foreach ( $experience_price as $fields ) :
-        if($fields['experience_course_name'] !== "" and $fields['experience_course_price']!== ""):
-          ?>
+              <?php foreach ($experience_group as $fields) :
+                  if ($fields['experience_course_name'] !== "" and $fields['experience_course_price'] !== "") :
+                ?>
               <dt><?php echo $fields['experience_course_name']; ?></dt>
               <dd><?php echo $fields['experience_course_price']; ?></dd>
-              <?php endif;endforeach; ?>
+              <?php endif;
+                endforeach; ?>
             </dl>
           </div>
           <?php endif; ?>
 
-          <?php $fun_price = SCF::get('fun_price_group',$price_id); if($fun_price[0]['fun_course_name']): ?>
+          <?php $fun_group = SCF::get_option_meta('price_option','fun');
+          if ($fun_group[0]['fun_course_name']) : ?>
           <div class="price__list data-list">
             <h3 class="data-list__title"><span>ファンダイビング</span></h3>
             <dl class="data-list__data">
-              <?php foreach ( $fun_price as $fields ) :
-        if($fields['fun_course_name'] !== "" and $fields['fun_course_price']!== ""):
-          ?>
+              <?php foreach ($fun_group as $fields) :
+                  if ($fields['fun_course_name'] !== "" and $fields['fun_course_price'] !== "") :
+                ?>
               <dt><?php echo $fields['fun_course_name']; ?></dt>
               <dd><?php echo $fields['fun_course_price']; ?></dd>
-              <?php endif;endforeach; ?>
+              <?php endif;
+                endforeach; ?>
             </dl>
           </div>
           <?php endif; ?>
 
-          <?php $special_price = SCF::get('special_price_group',$price_id); if($special_price[0]['special_course_name']): ?>
+          <?php $special_group = SCF::get_option_meta('price_option','special');
+          if ($special_group[0]['special_course_name']) : ?>
           <div class="price__list data-list">
             <h3 class="data-list__title"><span>スペシャルダイビング</span></h3>
             <dl class="data-list__data">
-              <?php foreach ( $special_price as $fields ) :
-        if($fields['special_course_name'] !== "" and $fields['special_course_price']!== ""):
-          ?>
+              <?php foreach ($special_group as $fields) :
+                  if ($fields['special_course_name'] !== "" and $fields['special_course_price'] !== "") :
+                ?>
               <dt><?php echo $fields['special_course_name']; ?></dt>
               <dd><?php echo $fields['special_course_price']; ?></dd>
-              <?php endif;endforeach; ?>
+              <?php endif;
+                endforeach; ?>
             </dl>
           </div>
           <?php endif; ?>
@@ -428,7 +407,7 @@ $privacypolicy = esc_url(home_url('/privacypolicy/'));
       </div>
       <div class="price__wrapper">
         <!-- button -->
-        <a href="<?php echo $price; ?>" class="price__button button"><span class="button__text">View more</span></a>
+        <a href="<?php echo $price; ?>" class="button"><span class="button__text">View more</span></a>
       </div>
     </div>
   </section>

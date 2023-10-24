@@ -99,9 +99,9 @@ $termsOfService = esc_url(home_url('/terms-of-service/'));
       <!-- ナビゲーション（sp） -->
       <div class="header__sp-nav sp-nav js-sp-nav">
         <div class="sp-nav__inner">
-          <div class="sp-nav__lists lists">
+          <div class="sp-nav__lists">
             <!-- ページリスト -->
-            <?php get_template_part('page-list'); ?>
+            <?php get_template_part('parts/lists'); ?>
           </div>
         </div>
       </div>

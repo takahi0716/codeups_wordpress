@@ -4,9 +4,8 @@ $voice = esc_url(home_url('/voice/'));
 $price = esc_url(home_url('/price/'));
 $single = esc_url(home_url('/single/'));
 $contact = esc_url(home_url('/contact/'));
-
 ?>
-<aside class="columns__sideber sidebar">
+<aside class="sidebar">
   <div class="sidebar__popular">
     <h2 class="sidebar__title sidebar-title">人気記事</h2>
     <div class="sidebar__cards popular-cards">
@@ -37,8 +36,8 @@ $contact = esc_url(home_url('/contact/'));
         </div>
       </a>
       <?php endwhile; ?>
-      <?php endif; ?>
       <?php wp_reset_postdata(); ?>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -70,14 +69,15 @@ $contact = esc_url(home_url('/contact/'));
         <h3 class="sidebar-voice__title"><?php the_title(); ?></h3>
       </div>
       <div class="sidebar-voice__wrapper">
-        <a href="<?php echo $voice; ?>" class="sidebar-voice__button button"><span class="button__text">View
+        <a href="<?php echo $voice; ?>" class="button"><span class="button__text">View
             more</span>
         </a>
       </div>
     </div>
     <?php endwhile; ?>
-    <?php endif; ?>
     <?php wp_reset_postdata(); ?>
+    <?php endif; ?>
+
   </div>
 
   <div class="sidebar__campaign">
@@ -97,41 +97,41 @@ $contact = esc_url(home_url('/contact/'));
       if ($the_view_query->have_posts()) :
         while ($the_view_query->have_posts()) : $the_view_query->the_post();
       ?>
-      <div class="archive-campaign-cards__item campaign-card">
-        <figure class="campaign-card__img">
-          <?php if (has_post_thumbnail()) {
+      <div class="archive-campaign-cards__item">
+        <div class="campaign-card">
+          <figure class="campaign-card__img">
+            <?php if (has_post_thumbnail()) {
                 the_post_thumbnail('post-thumbnail');
               } ?>
-        </figure>
-        <div class="campaign-card__inner">
-          <div class="campaign-card__body">
-            <h2 class="campaign-card__title campaign-card__title--sub"><?php the_title(); ?></h2>
-          </div>
-          <div class="campaign-card__price">
-            <p class="campaign-card__person">
-              全部コミコミ(お一人様)
-            </p>
-            <p class="campaign-card__price-text">
-              <?php
-                  $previous = get_field('previous');
-                  $current = get_field('price-current');
-                  ?>
-              <?php if ($previous) : ?>
-              <span class="campaign-card__price-previous"><?php echo $previous; ?></span>
-              <?php endif; ?>
-              <?php if ($current) : ?>
-              <span class="campaign-card__price-current"><?php echo $current; ?></span>
-              <?php endif; ?>
-            </p>
+          </figure>
+          <div class="campaign-card__inner">
+            <div class="campaign-card__body">
+              <h2 class="campaign-card__title campaign-card__title--sub"><?php the_title(); ?></h2>
+            </div>
+            <div class="campaign-card__price">
+              <p class="campaign-card__person">
+                全部コミコミ(お一人様)
+              </p>
+              <p class="campaign-card__price-text">
+                <?php
+                          $price_group = get_field('campaign_price-group');
+                          if ($price_group) :
+                          $previous_price = $price_group['previous_price'];
+                          $current_price = $price_group['current_price'];
+                          ?>
+                <span class="campaign-card__price-previous"><?php echo $previous_price; ?></span>
+                <span class="campaign-card__price-current"><?php echo $current_price; ?></span>
+                <?php endif; ?>
+              </p>
+            </div>
           </div>
         </div>
       </div>
       <?php endwhile; ?>
-      <?php endif; ?>
       <?php wp_reset_postdata(); ?>
+      <?php endif; ?>
       <div class="sidebar__campaign-wrapper">
-        <a href="<?php echo $campaign; ?>" class="sidebar-campaign__button button"><span class="button__text">View
-            more</span></a>
+        <a href="<?php echo $campaign; ?>" class="button"><span class="button__text">View more</span></a>
       </div>
     </div>
   </div>
