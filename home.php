@@ -53,9 +53,6 @@ $contact = esc_url(home_url('/contact/'));
         <div class="columns__sideber">
           <?php get_template_part('parts/sidebar'); ?>
         </div>
-        <div class="breadcrumb-layout">
-          <?php get_template_part('parts/breadcrumb'); ?>
-        </div>
       </div>
     </div>
   </section>
